@@ -2,4 +2,7 @@
     <string name="app_name">EstudoAndroid</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="feminino">Feminino</string>
+    <string name="masculino">Masculino</string>
+    <string name="enviar">Enviar</string>
 </resources>
