@@ -51,6 +51,12 @@ public class DetailsActivity extends AppCompatActivity {
                 if(txtNome.getText().toString().isEmpty() || txtSobrenome.getText().toString().isEmpty()
                         || txtEmail.getText().toString().isEmpty() || txtPassword.getText().toString().isEmpty()) {
                     Toast.makeText(DetailsActivity.this, "Todos os campos são obigatórios", Toast.LENGTH_LONG).show();
+
+                    if(txtNome.getText().toString().isEmpty()) txtNome.setError("Digite o nome");
+
+                    if(txtSobrenome.getText().toString().isEmpty()) txtSobrenome.setError("Digite o sobrenome");
+                    if(txtEmail.getText().toString().isEmpty()) txtEmail.setError("Digite o email");
+                    if(txtPassword.getText().toString().isEmpty()) txtPassword.setError("Digite a senha");
                 } else {
 
                     if (intent != null) {
