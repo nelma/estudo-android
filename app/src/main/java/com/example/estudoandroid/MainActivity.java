@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 TextView tvTitle = v.findViewById(R.id.tvTitle);
-                Toast.makeText(MainActivity.this, "", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Cliquei no card", Toast.LENGTH_SHORT).show();
             }
         };
 
