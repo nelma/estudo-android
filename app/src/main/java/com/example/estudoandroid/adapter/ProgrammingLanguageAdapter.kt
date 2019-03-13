@@ -1,15 +1,17 @@
-package com.example.estudoandroid
+package com.example.estudoandroid.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.estudoandroid.domain.ProgrammingLanguage
+import com.example.estudoandroid.R
 import kotlinx.android.synthetic.main.programming_language_item.view.*
 
 //val transforma em uma propriedade
 class ProgrammingLanguageAdapter(
-       private val items: List<ProgrammingLanguage>,
-       private val listener: (ProgrammingLanguage) -> Unit
+        private val items: List<ProgrammingLanguage>,
+        private val listener: (ProgrammingLanguage) -> Unit
 ) : RecyclerView.Adapter<ProgrammingLanguageAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -17,7 +19,7 @@ class ProgrammingLanguageAdapter(
                 .inflate(R.layout.programming_language_item, parent, false)
 
 
-        return  ViewHolder(view, listener)
+        return ViewHolder(view, listener)
     }
 
     override fun getItemCount() = items.size

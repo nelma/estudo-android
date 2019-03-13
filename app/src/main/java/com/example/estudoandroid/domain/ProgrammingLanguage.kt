@@ -1,4 +1,4 @@
-package com.example.estudoandroid
+package com.example.estudoandroid.domain
 
 import androidx.annotation.DrawableRes
 
