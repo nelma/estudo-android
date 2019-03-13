@@ -5,4 +5,8 @@
     <string name="feminino">Feminino</string>
     <string name="masculino">Masculino</string>
     <string name="enviar">Enviar</string>
+    <string name="nome">Nome</string>
+    <string name="sobrenome">Sobrenome</string>
+    <string name="e_mail">E-mail</string>
+    <string name="senha">Senha</string>
 </resources>

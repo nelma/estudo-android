@@ -5,9 +5,12 @@ import androidx.appcompat.app.AppCompatActivity
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.Toast
 
 import kotlinx.android.synthetic.main.activity_details.*
+import org.jetbrains.anko.toast
 
 class DetailsActivity : AppCompatActivity() {
 
@@ -18,10 +21,16 @@ class DetailsActivity : AppCompatActivity() {
 
         val intent = intent
 
-        if (intent != null) {
-            val info = intent.getStringExtra("INFO")
+//        if (intent != null) {
+            val info = intent?.getStringExtra("INFO")
             Toast.makeText(this, "info", Toast.LENGTH_LONG).show()
-        }
+//        }
+
+        radioGroup.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener {
+            group, checkedId ->
+            var radio: RadioButton = findViewById(checkedId)
+            toast("Selecionado: ${radio.text}")
+        })
 
         btSend?.setOnClickListener {
             if (edNome.text.toString().isEmpty() || edSobrenome.text.toString().isEmpty()
