@@ -1,6 +1,7 @@
 package com.example.estudoandroid.view
 
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -69,5 +70,9 @@ class MainActivity : AppCompatActivity() {
         }
         recyclerView.adapter = adapter
 
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?, outPersistentState: PersistableBundle?) {
+        super.onSaveInstanceState(outState, outPersistentState)
     }
 }
