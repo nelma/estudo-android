@@ -2,7 +2,9 @@ package com.example.estudoandroid
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
 
@@ -42,11 +44,19 @@ object NotificationCreation {
                 }
             }
 
+            val intent = Intent(context, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
+
+            val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
+
             val notification = NotificationCompat.Builder(context, CHANNEL_ID)
                     .setContentTitle(title)
                     .setSmallIcon(android.R.drawable.ic_dialog_alert)
                     .setContentText(body)
                     .setTicker(title)
+                    .setContentIntent(pendingIntent)
+                    .setAutoCancel(true)
+                    .setStyle(NotificationCompat.BigTextStyle().bigText(body))
                     .build()
 
             notificationManager.notify(NOTIFY_ID, notification)
