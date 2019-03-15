@@ -25,10 +25,12 @@ class MainActivity : AppCompatActivity() {
         if(requestCode === SELECT_PICTURE) {
             if(resultCode == RESULT_OK) {
 
-                if(data?.extras != null) {
+                data?.extras?.let {
                     val bitmap = data.extras?.get("data") as Bitmap
                     ivMain.setImageBitmap(bitmap)
-                } else if (data?.data != null) {
+                }
+
+                data?.data?.let {
                     Picasso.get().load(data.data).into(ivMain)
                 }
 
