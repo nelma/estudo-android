@@ -69,7 +69,6 @@
             android:layout_marginTop="8dp"
             android:text="@={game.name}"
             tools:text="Game's Name Editing"
-            android:visibility="@{game.isClassic? View.VISIBLE : View.GONE}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvRating"/>
