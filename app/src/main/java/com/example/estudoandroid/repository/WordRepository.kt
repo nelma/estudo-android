@@ -26,4 +26,10 @@ class WordRepository(application: Application) {
             wordDao.insert(word)
         }
     }
+
+    fun deleteAll() {
+        doAsync {
+            wordDao.deleteAll()
+        }
+    }
 }

@@ -15,6 +15,7 @@ import com.example.estudoandroid.viewmodel.WordViewModel
 import kotlinx.android.synthetic.main.activity_basic.*
 import kotlinx.android.synthetic.main.content_basic.*
 import org.jetbrains.anko.longToast
+import org.jetbrains.anko.sdk27.coroutines.onClick
 import org.jetbrains.anko.startActivityForResult
 
 class BasicActivity : AppCompatActivity() {
@@ -61,13 +62,15 @@ class BasicActivity : AppCompatActivity() {
                     wordViewModel.insert(word)
                 }
 
-//                fab.setOnClickListener{ view ->
-//                    Snackbar.make(view, "Ações", Snackbar.LENGTH_LONG)
-//                            .setAction("Action", null).show()
-//                }
-
             } else {
                 longToast("Word was empty")
+
+//                fab.setOnClickListener{ view ->
+//                    Snackbar.make(this, object , Snackbar.LENGTH_LONG)
+//                            .setAction(fab.onClick {
+//                                startActivityForResult<NewWordActivity>(NEW_WORD_REQUEST_CODE)
+//                            }, null).show()
+//                }
             }
         }
     }
