@@ -3,6 +3,9 @@ package com.example.estudoandroid.view
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,9 +19,8 @@ import com.example.estudoandroid.viewmodel.WordViewModel
 
 import kotlinx.android.synthetic.main.activity_basic.*
 import kotlinx.android.synthetic.main.content_basic.*
-import org.jetbrains.anko.longToast
+import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
-import org.jetbrains.anko.startActivityForResult
 
 class BasicActivity : AppCompatActivity() {
 
@@ -28,6 +30,32 @@ class BasicActivity : AppCompatActivity() {
 
     companion object {
         private const val NEW_WORD_REQUEST_CODE: Int = 1
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+
+        when(item?.itemId) {
+            R.id.deleteAll -> {
+
+                alert("Do you wish all items?") {
+                    title = "Warning"
+                    yesButton {
+                        wordViewModel.deleteAll()
+                    }
+                    noButton {
+                        longToast("No")
+                    }
+                }.show()
+//
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
