@@ -3,12 +3,14 @@ package com.example.estudoandroid.view
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.estudoandroid.R
+import com.example.estudoandroid.R.layout.*
 import com.example.estudoandroid.entities.Word
 import com.example.estudoandroid.viewmodel.WordViewModel
 
@@ -30,7 +32,7 @@ class BasicActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_basic)
+        setContentView(activity_basic)
         setSupportActionBar(toolbar)
 
 
@@ -63,14 +65,12 @@ class BasicActivity : AppCompatActivity() {
                 }
 
             } else {
-                longToast("Word was empty")
-
-//                fab.setOnClickListener{ view ->
-//                    Snackbar.make(this, object , Snackbar.LENGTH_LONG)
-//                            .setAction(fab.onClick {
-//                                startActivityForResult<NewWordActivity>(NEW_WORD_REQUEST_CODE)
-//                            }, null).show()
-//                }
+                Snackbar.make(fab, "Word was empty", Snackbar.LENGTH_LONG)
+                        .setAction("Retry", object : View.OnClickListener{
+                            override fun onClick(v: View?) {
+                                startActivityForResult<NewWordActivity>(NEW_WORD_REQUEST_CODE)
+                            }
+                        }).show()
             }
         }
     }
