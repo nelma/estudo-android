@@ -6,7 +6,8 @@
 
     <TextView
         android:id="@+id/textView"
-        android:background="@android:color/holo_orange_light"
+        android:background="@drawable/my_rect"
+        android:elevation="6sp"
         style="@style/word_title"/>
 
 </LinearLayout>
