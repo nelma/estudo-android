@@ -4,23 +4,27 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.MotionEvent
 import android.view.View
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.estudoandroid.R
 import com.example.estudoandroid.R.layout.*
 import com.example.estudoandroid.entities.Word
+import com.example.estudoandroid.listeners.OnItemClickListener
+import com.example.estudoandroid.listeners.addOnItemClickListener
 import com.example.estudoandroid.viewmodel.WordViewModel
 
 import kotlinx.android.synthetic.main.activity_basic.*
 import kotlinx.android.synthetic.main.content_basic.*
 import org.jetbrains.anko.*
-import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class BasicActivity : AppCompatActivity() {
 
@@ -52,7 +56,6 @@ class BasicActivity : AppCompatActivity() {
                         longToast("No")
                     }
                 }.show()
-//
             }
         }
         return super.onOptionsItemSelected(item)
@@ -67,15 +70,35 @@ class BasicActivity : AppCompatActivity() {
         val adapter = WordListAdapter()
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.setHasFixedSize(true)
+        recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+
+        val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(
+                0,
+                ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+            override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, position: Int) {
+                wordViewModel.delete(adapter.getItem(viewHolder.adapterPosition))
+                longToast("Word deleted!")
+            }
+
+        }
+
+        val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
+        itemTouchHelper.attachToRecyclerView(recyclerView)
+
 
         wordViewModel.allWords.observe(this, Observer {
             adapter.items = it
         })
 
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+        fab.setOnClickListener {
+            val intent = Intent(this@BasicActivity, NewWordActivity::class.java)
+            startActivityForResult<NewWordActivity>(NEW_WORD_REQUEST_CODE)
         }
 
 

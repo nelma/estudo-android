@@ -18,4 +18,8 @@ class WordViewModel(application: Application) : AndroidViewModel(application) {
     fun deleteAll() {
         repository.deleteAll()
     }
+
+    fun delete(word: Word) {
+        repository.delete(word)
+    }
 }

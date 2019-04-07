@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.estudoandroid.R
 import com.example.estudoandroid.entities.Word
+import com.example.estudoandroid.viewmodel.WordViewModel
 import kotlinx.android.synthetic.main.recyclerview_item.view.*
 
 class WordListAdapter :
@@ -32,6 +33,10 @@ class WordListAdapter :
     override fun onBindViewHolder(holder: WordViewHolder, position: Int) {
         val item = items[position]
         holder.bindView(item)
+    }
+
+    fun getItem(position: Int): Word {
+        return items.get(index = position)
     }
 
     class WordViewHolder(itemView: View) :
