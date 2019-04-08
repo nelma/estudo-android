@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.estudoandroid.R
 import kotlinx.android.synthetic.main.activity_new_word.*
+import org.jetbrains.anko.longToast
 
 class NewWordActivity : AppCompatActivity() {
 
@@ -16,6 +17,12 @@ class NewWordActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_word)
+
+        intent.getStringExtra("WORD")?.let {
+            val word = intent.getStringExtra("WORD")
+            longToast("$word")
+            etWord.setText(word)
+        }
 
 
         btSave.setOnClickListener {

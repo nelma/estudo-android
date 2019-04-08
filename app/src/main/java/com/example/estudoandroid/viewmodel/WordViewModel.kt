@@ -22,4 +22,8 @@ class WordViewModel(application: Application) : AndroidViewModel(application) {
     fun delete(word: Word) {
         repository.delete(word)
     }
+
+    fun update(word: Word) {
+        repository.update(word)
+    }
 }

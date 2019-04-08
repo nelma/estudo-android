@@ -29,6 +29,7 @@ import com.example.estudoandroid.viewmodel.WordViewModel
 
 import kotlinx.android.synthetic.main.activity_basic.*
 import kotlinx.android.synthetic.main.content_basic.*
+import kotlinx.android.synthetic.main.recyclerview_item.view.*
 import org.jetbrains.anko.*
 
 class BasicActivity : AppCompatActivity() {
@@ -39,6 +40,7 @@ class BasicActivity : AppCompatActivity() {
 
     companion object {
         private const val NEW_WORD_REQUEST_CODE: Int = 1
+        private const val UPDATE_WORD_REQUEST_CODE: Int = 2
     }
 
     private var swipeBackground: ColorDrawable = ColorDrawable(Color.parseColor("#FF0000"))
@@ -80,6 +82,16 @@ class BasicActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.setHasFixedSize(true)
         recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+
+        recyclerView.addOnItemClickListener(object: OnItemClickListener {
+            override fun onItemClicked(position: Int, view: View) {
+
+                val word = view.textView.text
+                val intent = Intent(this@BasicActivity, NewWordActivity::class.java)
+                intent.putExtra("WORD", "$word")
+                startActivityForResult(intent, UPDATE_WORD_REQUEST_CODE)
+            }
+        })
 
         deleteIcon = ContextCompat.getDrawable(this, R.drawable.ic_delete)!!
 
@@ -162,6 +174,21 @@ class BasicActivity : AppCompatActivity() {
                 data?.let {
                     val word = Word(it.getStringExtra(NewWordActivity.WORD_KEY))
                     wordViewModel.insert(word)
+                }
+
+            } else {
+                Snackbar.make(fab, "Word was empty", Snackbar.LENGTH_LONG)
+                        .setAction("Retry", object : View.OnClickListener{
+                            override fun onClick(v: View?) {
+                                startActivityForResult<NewWordActivity>(NEW_WORD_REQUEST_CODE)
+                            }
+                        }).show()
+            }
+        } else if(requestCode == UPDATE_WORD_REQUEST_CODE) {
+            if(resultCode == Activity.RESULT_OK) {
+                data?.let {
+                    val word = Word(it.getStringExtra(NewWordActivity.WORD_KEY))
+                    wordViewModel.update(word)
                 }
 
             } else {
