@@ -90,17 +90,19 @@ class BasicActivity : AppCompatActivity() {
                 return false
             }
 
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, position: Int) {
-//                alert ("Do you wish this item?") {
-//                    title = "Warning"
-//                    yesButton {
-                        wordViewModel.delete(adapter.getItem(viewHolder.adapterPosition))
-                        longToast("Word deleted!")
-//                    }
-//                    noButton {
-//                        longToast("No")
-//                    }
-//                }.show()
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.adapterPosition;
+
+                if(direction == ItemTouchHelper.LEFT) {
+                    wordViewModel.delete(adapter.getItem(position))
+                    longToast("Word deleted!")
+                } else {
+                    //opcao para editar
+                    longToast("RIGHT")
+                }
+
+
+
             }
 
             override fun onChildDraw(c: Canvas,
