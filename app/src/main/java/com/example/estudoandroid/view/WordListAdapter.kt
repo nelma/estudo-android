@@ -44,6 +44,7 @@ class WordListAdapter :
 
         fun bindView(item: Word) = with(itemView) {
             textView.text = item.word
+            idView.text = item.id.toString()
         }
     }
 }

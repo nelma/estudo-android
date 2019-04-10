@@ -11,8 +11,11 @@ import org.jetbrains.anko.longToast
 class NewWordActivity : AppCompatActivity() {
 
     companion object {
-        const val WORD_KEY = "WORD"
+        const val WORD_TEXT = "WORD"
+        const val WORD_ID = "WORD_ID"
     }
+
+    private var idWord: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,7 +23,10 @@ class NewWordActivity : AppCompatActivity() {
 
         intent.getStringExtra("WORD")?.let {
             val word = intent.getStringExtra("WORD")
+            val id = intent.getStringExtra("WORD_ID")
+            idWord = id
             longToast("$word")
+            longToast("$id")
             etWord.setText(word)
         }
 
@@ -31,7 +37,8 @@ class NewWordActivity : AppCompatActivity() {
             if(etWord.text.isEmpty()) {
                 setResult(Activity.RESULT_CANCELED, replyIntent)
             } else {
-                replyIntent.putExtra(WORD_KEY, etWord.text.toString())
+                replyIntent.putExtra(WORD_TEXT, etWord.text.toString())
+                replyIntent.putExtra(WORD_ID, idWord)
                 setResult(Activity.RESULT_OK, replyIntent)
             }
 

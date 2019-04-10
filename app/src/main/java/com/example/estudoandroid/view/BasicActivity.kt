@@ -9,7 +9,6 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.MotionEvent
 import android.view.View
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,6 +36,8 @@ class BasicActivity : AppCompatActivity() {
     private val wordViewModel: WordViewModel by lazy {
         ViewModelProviders.of(this).get(WordViewModel::class.java)
     }
+
+    var idWord: Long = 0
 
     companion object {
         private const val NEW_WORD_REQUEST_CODE: Int = 1
@@ -86,9 +87,13 @@ class BasicActivity : AppCompatActivity() {
         recyclerView.addOnItemClickListener(object: OnItemClickListener {
             override fun onItemClicked(position: Int, view: View) {
 
+                idWord = position.toLong()
+
                 val word = view.textView.text
+                val id = view.idView.text
                 val intent = Intent(this@BasicActivity, NewWordActivity::class.java)
                 intent.putExtra("WORD", "$word")
+                intent.putExtra("WORD_ID", "$id")
                 startActivityForResult(intent, UPDATE_WORD_REQUEST_CODE)
             }
         })
@@ -172,7 +177,10 @@ class BasicActivity : AppCompatActivity() {
         if(requestCode == NEW_WORD_REQUEST_CODE) {
             if(resultCode == Activity.RESULT_OK) {
                 data?.let {
-                    val word = Word(it.getStringExtra(NewWordActivity.WORD_KEY))
+
+//                    val word = Word(it.getStringExtra(NewWordActivity.WORD_TEXT))
+                    var word = Word()
+                    word.word = it.getStringExtra(NewWordActivity.WORD_TEXT)
                     wordViewModel.insert(word)
                 }
 
@@ -184,10 +192,13 @@ class BasicActivity : AppCompatActivity() {
                             }
                         }).show()
             }
-        } else if(requestCode == UPDATE_WORD_REQUEST_CODE) {
+        }
+        else if(requestCode == UPDATE_WORD_REQUEST_CODE) {
             if(resultCode == Activity.RESULT_OK) {
                 data?.let {
-                    val word = Word(it.getStringExtra(NewWordActivity.WORD_KEY))
+                    val word = Word()
+                    word.id = it.getStringExtra(NewWordActivity.WORD_ID).toLong()
+                    word.word = it.getStringExtra(NewWordActivity.WORD_TEXT)
                     wordViewModel.update(word)
                 }
 

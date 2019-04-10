@@ -29,11 +29,11 @@ abstract class WordRoomDatabase: RoomDatabase() {
 
                         dao.deleteAll()
 
-                        val word1 = Word("PagSeguro")
-                        val word2 = Word("Kotlin")
-
-                        dao.insert(word1)
-                        dao.insert(word2)
+//                        val word1 = Word("PagSeguro")
+//                        val word2 = Word("Kotlin")
+//
+//                        dao.insert(word1)
+//                        dao.insert(word2)
 
 
                     }
